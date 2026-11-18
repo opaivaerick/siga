@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Siga Papai & Cassinha</title>
+  <meta name="description" content="Siga todas as redes do Papai e da Cassinha num lugar só e participe do sorteio do GTA VI.">
+  <meta property="og:title" content="Sorteio GTA VI — Papai × Cassinha">
+  <meta property="og:description" content="Siga as redes dos dois e concorra a uma cópia do GTA VI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0D0E12;
+      --surface: #181B24;
+      --surface-2: #20242F;
+      --ora: #FF5E1A;
+      --amb: #FFB800;
+      --cream: #F4EFE6;
+      --muted: #A9A49A;
+      --pink: #FF4FA3;
+      --ok: #53FC18;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(255, 94, 26, 0.10), transparent 40%),
+        radial-gradient(circle at 80% 90%, rgba(255, 79, 163, 0.08), transparent 40%);
+    }
+    .pixel { font-family: 'Press Start 2P', monospace; letter-spacing: 0.5px; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 16px 48px; }
+
+    header { text-align: center; margin-bottom: 26px; }
+    .tag {
+      display: inline-block; font-size: 10px; color: var(--bg); background: var(--amb);
+      padding: 8px 10px 6px; box-shadow: 4px 4px 0 #000; margin-bottom: 18px;
+    }
+    h1 { font-size: clamp(18px, 5vw, 30px); line-height: 1.5; color: var(--amb); text-shadow: 4px 4px 0 var(--ora); }
+    h1 .x { color: var(--cream); text-shadow: none; margin: 0 6px; }
+    .sub { margin-top: 12px; color: var(--muted); font-size: 14px; }
+
+    .box {
+      background: var(--surface); border: 4px solid var(--ora); box-shadow: 6px 6px 0 #000;
+      padding: 18px; margin-bottom: 22px;
+    }
+    .box h2 { font-size: 12px; color: var(--amb); margin-bottom: 14px; line-height: 1.6; }
+
+    ol.steps { list-style: none; counter-reset: s; display: grid; gap: 10px; }
+    ol.steps li {
+      counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; font-size: 14px;
+    }
+    ol.steps li::before {
+      content: counter(s); font-family: 'Press Start 2P', monospace; font-size: 12px;
+      width: 34px; height: 34px; display: grid; place-items: center;
+      background: var(--ora); color: var(--bg); box-shadow: 3px 3px 0 #000;
+    }
+    ol.steps b { color: var(--amb); }
+
+    .progress { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .bar { flex: 1; height: 16px; background: #000; border: 2px solid var(--surface-2); }
+    .bar i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(90deg, var(--amb) 0 8px, var(--ora) 8px 16px); transition: width .3s; }
+    .progress span { font-size: 11px; white-space: nowrap; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+
+    .card { background: var(--surface); border: 4px solid var(--ora); box-shadow: 6px 6px 0 #000; padding: 16px; }
+    .card.p2 { border-color: var(--pink); }
+    .who { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .who img { width: 56px; height: 56px; image-rendering: pixelated; background: var(--bg); border: 2px solid var(--ora); object-fit: contain; }
+    .badge { width: 56px; height: 56px; display: grid; place-items: center; background: var(--bg); border: 2px solid var(--pink); color: var(--pink); font-size: 14px; }
+    .who h3 { font-size: 13px; line-height: 1.6; }
+    .card.p1 .who h3 { color: var(--amb); }
+    .card.p2 .who h3 { color: var(--pink); }
+    .who small { display: block; color: var(--muted); font-size: 12px; }
+
+    .links { display: grid; gap: 8px; }
+    .link {
+      display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px;
+      background: var(--bg); border: 2px solid var(--surface-2); padding: 10px 12px;
+      color: var(--cream); text-decoration: none; font-size: 14px; transition: transform .08s, border-color .15s;
+    }
+    .link:hover, .link:focus-visible { border-color: var(--amb); transform: translate(-2px, -2px); box-shadow: 2px 2px 0 #000; outline: none; }
+    .link .ico { font-size: 18px; text-align: center; }
+    .link .net { font-weight: 800; }
+    .link .net small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+    .link .go { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--bg); background: var(--amb); padding: 6px 7px 4px; }
+    .link.done { border-color: var(--ok); }
+    .link.done .go { background: var(--ok); }
+
+    .share { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .btn {
+      font-family: 'Press Start 2P', monospace; font-size: 10px; cursor: pointer; border: 0;
+      background: var(--ora); color: var(--bg); padding: 12px 14px 10px; box-shadow: 4px 4px 0 #000; text-decoration: none;
+    }
+    .btn.alt { background: var(--surface-2); color: var(--cream); }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+
+    footer { text-align: center; color: var(--muted); font-size: 12px; margin-top: 28px; }
+    footer a { color: var(--amb); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <span class="tag pixel">★ SORTEIO GTA VI ★</span>
+      <h1 class="pixel">PAPAI<span class="x">×</span>CASSINHA</h1>
+      <p class="sub">Live de 24h · quarta 18/11 às 23h → quinta 19/11 às 23h</p>
+    </header>
+
+    <section class="box">
+      <h2 class="pixel">COMO PARTICIPAR</h2>
+      <ol class="steps">
+        <li><span><b>Assista logado</b> na live (Twitch ou Kick). Cada minuto vale <b>1 ponto</b>. Digite <b>!points</b> no chat para ver os seus.</span></li>
+        <li><span><b>Siga todas as redes</b> dos dois aqui embaixo. Toque em cada botão e clique em seguir ou inscrever-se. O botão fica verde para você saber o que já fez.</span></li>
+        <li><span><b>Compartilhe a live</b> no story ou status marcando <b>@soypapai</b> e <b>@_cassiaassis_</b> e mande o print por DM no Instagram.</span></li>
+        <li><span>Fique de olho: durante a live aparecem <b>palavras secretas</b>. Digite cada uma no chat em até 10 minutos.</span></li>
+      </ol>
+      <p class="sub" style="margin-top:14px">Ganha quem tiver mais pontos e cumprir tudo. Se empatar, sorteio ao vivo. Grátis, não precisa ser sub.</p>
+      <div class="share">
+        <button class="btn" id="shareBtn" type="button">COMPARTILHAR A LIVE</button>
+        <a class="btn alt" href="https://twitch.tv/opapaibh" target="_blank" rel="noopener">ASSISTIR AGORA</a>
+      </div>
+    </section>
+
+    <div class="progress">
+      <div class="bar"><i id="barFill"></i></div>
+      <span class="pixel" id="barText">0/13</span>
+    </div>
+
+    <div class="grid">
+      <section class="card p1">
+        <div class="who">
+          <img src="./avatar_papai.png" alt="Avatar 8-bit do Papai">
+          <div><h3 class="pixel">PAPAI</h3><small>Vida real, tech, política e games</small></div>
+        </div>
+        <div class="links" id="papai"></div>
+      </section>
+
+      <section class="card p2">
+        <div class="who">
+          <div class="badge pixel">P2</div>
+          <div><h3 class="pixel">CASSINHA</h3><small>Parceira da live 24h</small></div>
+        </div>
+        <div class="links" id="cassinha"></div>
+      </section>
+    </div>
+
+    <footer>
+      <p>Te Quiero Mucho 🐕 · Regras completas no chat: <b>!sorteio</b></p>
+    </footer>
+  </div>
+
+  <script>
+    const LINKS = {
+      papai: [
+        ['🟣', 'Twitch', 'opapaibh', 'https://twitch.tv/opapaibh'],
+        ['🟢', 'Kick', 'soypapai', 'https://kick.com/soypapai'],
+        ['🔴', 'YouTube', '@soypapai', 'https://youtube.com/@soypapai?sub_confirmation=1'],
+        ['🔴', 'YouTube Lives', '@PapaiLives', 'https://youtube.com/@PapaiLives?sub_confirmation=1'],
+        ['✂️', 'YouTube Cortes', '@soypapaicortes', 'https://youtube.com/@soypapaicortes?sub_confirmation=1'],
+        ['📸', 'Instagram', '@soypapai', 'https://instagram.com/soypapai'],
+        ['𝕏', 'X', '@soypapai', 'https://x.com/soypapai'],
+        ['🎵', 'TikTok', '@opaivaerick', 'https://tiktok.com/@opaivaerick'],
+      ],
+      cassinha: [
+        ['🟣', 'Twitch', 'cassinha', 'https://twitch.tv/cassinha'],
+        ['🔴', 'YouTube', '@cassinha', 'https://youtube.com/@cassinha?sub_confirmation=1'],
+        ['📸', 'Instagram', '@_cassiaassis_', 'https://instagram.com/_cassiaassis_'],
+        ['🎵', 'TikTok', '@cassinhalive', 'https://tiktok.com/@cassinhalive'],
+        ['𝕏', 'X', '@cassinhalive', 'https://x.com/cassinhalive'],
+      ],
+    };
+
+    // Marca o que a pessoa já abriu (fica só no navegador dela)
+    const KEY = 'siga_papai_cassinha_v1';
+    let done = {};
+    try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} };
+    const total = LINKS.papai.length + LINKS.cassinha.length;
+
+    function updateBar() {
+      const n = Object.keys(done).length;
+      document.getElementById('barFill').style.width = (n / total * 100) + '%';
+      document.getElementById('barText').textContent = n + '/' + total;
+    }
+
+    for (const who of Object.keys(LINKS)) {
+      const box = document.getElementById(who);
+      for (const [ico, net, handle, url] of LINKS[who]) {
+        const id = who + ':' + net;
+        const a = document.createElement('a');
+        a.className = 'link' + (done[id] ? ' done' : '');
+        a.href = url; a.target = '_blank'; a.rel = 'noopener';
+        a.innerHTML = `<span class="ico">${ico}</span><span class="net">${net}<small>${handle}</small></span><span class="go">${done[id] ? 'OK' : 'SEGUIR'}</span>`;
+        a.addEventListener('click', () => {
+          done[id] = 1; save();
+          a.classList.add('done'); a.querySelector('.go').textContent = 'OK';
+          updateBar();
+        });
+        box.appendChild(a);
+      }
+    }
+    updateBar();
+
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const data = { title: 'Live 24h de GTA VI — Papai × Cassinha', text: 'Bora na live de 24h de GTA VI com sorteio do jogo!', url: 'https://twitch.tv/opapaibh' };
+      try {
+        if (navigator.share) await navigator.share(data);
+        else { await navigator.clipboard.writeText(data.text + ' ' + data.url); alert('Link copiado! Cole no seu story.'); }
+      } catch (e) {}
+    });
+  </script>
+</body>
+</html>
